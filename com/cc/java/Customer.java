@@ -31,11 +31,19 @@ public class Customer {
         if (order == null ) { // gibt es das Objekt ???
             Helper.ausgabe("Kein Auftrag vorhanden!");
         } else {
-            Helper.ausgabe(customer.getOrder());
             Helper.ausgabe(order.getOrderDate()); 
-            Helper.ausgabe(order.isFinished());
+            Helper.ausgabe(checkOrderStatus());
         }
     }
+    private String checkOrderStatus(){
+        if (order.isFinished()){
+            return "habe fertig";
+            }
+        else {
+            return "ich machen";
+        }
+    }
+
 
     /** Getter */
 
