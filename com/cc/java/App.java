@@ -9,9 +9,9 @@ public class App {
         customer.initOrder();
         Helper.ausgabe(customer.getOrder());
         customer.checkOrder();
-        customer.removeOrder();
-        Helper.ausgabe(customer.getOrder());
-        customer.checkOrder();
+        //customer.removeOrder();
+        //Helper.ausgabe(customer.getOrder());
+        //customer.checkOrder();
     }
 
 }

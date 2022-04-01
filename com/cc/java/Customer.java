@@ -32,6 +32,7 @@ public class Customer {
             Helper.ausgabe("Kein Auftrag vorhanden!");
         } else {
            Helper.ausgabe(order.getOrderDate()); 
+           Helper.ausgabe(order.isFinished());
         }
     }
 
