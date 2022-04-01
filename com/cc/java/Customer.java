@@ -1,8 +1,9 @@
 package com.cc.java;
 
 public class Customer {
-    private int id;
-    private String name; 
+   
+    private int id; 
+    private String name;
     private String city;
 
     private Order order;
@@ -11,47 +12,44 @@ public class Customer {
         this.id = id;
         this.name = name;
         this.city = city;
-
-
     }
 
-    // assoziation
-    public void initOrder(){
-        order = new Order(1,"Repair");
+    /** Assoziation */
+    public void initOrder() {
+        // Referenz auf erzeugtes Objekt im Heap
+        order = new Order(1, "repair");
     }
 
-    public void removeOrder(){
+    public void removeOrder() {
+        // Referenz wird mit null überschrieben
+        // --> Objekt wird durch Garbage Collector 
+        // aus dem Heap entfernt 
         order = null;
     }
 
-
-
-    //getter
-    public String getName() {
-        return name;
+    public void checkOrder() {
+        if (order == null ) { // gibt es das Objekt ???
+            Helper.ausgabe("Kein Auftrag vorhanden!");
+        } else {
+           Helper.ausgabe(order.getOrderDate()); 
+        }
     }
-    public String getCity() {
-        return city;
-    }
+
+    /** Getter */
+
     public int getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
     public Order getOrder() {
         return order;
     }
-
-    
-    // setter
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setOrder(Order order) {
-        this.order = order;
-    }    
 }
