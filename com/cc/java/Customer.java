@@ -31,8 +31,9 @@ public class Customer {
         if (order == null ) { // gibt es das Objekt ???
             Helper.ausgabe("Kein Auftrag vorhanden!");
         } else {
-           Helper.ausgabe(order.getOrderDate()); 
-           Helper.ausgabe(order.isFinished());
+            Helper.ausgabe(customer.getOrder());
+            Helper.ausgabe(order.getOrderDate()); 
+            Helper.ausgabe(order.isFinished());
         }
     }
 
