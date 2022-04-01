@@ -25,6 +25,7 @@ public class Customer {
     }
 
 
+
     //getter
     public String getName() {
         return name;
@@ -35,7 +36,11 @@ public class Customer {
     public int getId() {
         return id;
     }
+    public Order getOrder() {
+        return order;
+    }
 
+    
     // setter
     public void setId(int id) {
         this.id = id;
@@ -46,5 +51,7 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
-    
+    public void setOrder(Order order) {
+        this.order = order;
+    }    
 }
