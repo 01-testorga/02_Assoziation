@@ -41,14 +41,14 @@ public class Customer {
         }
     }
 
-    private String getOrderDetails(String flag, Order oder){
+    private String getOrderDetails(String flag, Order order){
         switch (flag) {
             case "#type": // ordertype 
-                return oder.getOrderType();
+                return order.getOrderType();
             case "#date": // orderdate
-                return String.valueOf(oder.getOrderDate());
+                return String.valueOf(order.getOrderDate());
             case "#status": // orderstatus
-                return checkOrderStatus(oder);
+                return checkOrderStatus(order);
             default:
                 return "Irgendwas ging schief!";
         }
