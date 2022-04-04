@@ -1,12 +1,14 @@
 package com.cc.java;
 
+import java.util.ArrayList;
+
 public class Customer {
    
-    private int id; 
+    private int id;
     private String name;
     private String city;
 
-    private Order order;
+    private ArrayList<Order> orders = new ArrayList<>();
 
     public Customer(int id, String name, String city) {
         this.id = id;
@@ -14,55 +16,62 @@ public class Customer {
         this.city = city;
     }
 
-    /** Assoziation */
-    public void initOrder() {
-        // Referenz auf erzeugtes Objekt im Heap
-        order = new Order(1, "repair");
+     /** Assoziation */
+
+    public void addOrder(int id, String type, int delay){
+        Order order = new Order(id, type , delay, this);
+        orders.add(order);
+        Logger.ausgabe(orders);
+        checkOrder(order);
     }
 
-    public void removeOrder() {
-        // Referenz wird mit null überschrieben
-        // --> Objekt wird durch Garbage Collector 
-        // aus dem Heap entfernt 
-        order = null;
+    public void removeOrder(Order order){
+        orders.remove(order);
+        Logger.ausgabe(orders);
     }
 
-    public void checkOrder() {
-        if (order == null ) { // gibt es das Objekt ???
-            Helper.ausgabe("Kein Auftrag vorhanden!");
+    public void checkOrder(Order order){
+        if (orders.size() == 0) {  // gibt es das Objekt ???
+            Logger.ausgabe("Kein Auftrag vorhanden!");
         } else {
-            Helper.ausgabe(getOrderDetails("#type")); 
-            Helper.ausgabe(getOrderDetails("#date"));
-            Helper.ausgabe(getOrderDetails("#status"));
+            Logger.ausgabe(getOrderDetails("#status",order));
+            Logger.ausgabe(getOrderDetails("#type",order));
+            Logger.ausgabe(getOrderDetails("#date",order));
+            Logger.ausgabe("--------------"); 
         }
     }
-    
-    private String getOrderDetails(String flag){
+
+    private String getOrderDetails(String flag, Order oder){
         switch (flag) {
-            case "#type":
-                return order.getOrderType();
-            case "#date":
-                return String.valueOf(order.getOrderDate());     
-            case "#status":
-                return checkOrderStatus();
-            
+            case "#type": // ordertype 
+                return oder.getOrderType();
+            case "#date": // orderdate
+                return String.valueOf(oder.getOrderDate());
+            case "#status": // orderstatus
+                return checkOrderStatus(oder);
             default:
-               return "dem geht ned";
+                return "Irgendwas ging schief!";
         }
     }
 
-    private String checkOrderStatus(){
-        if (order.isFinished()){
-            return "habe fertig";
-            }
-        else {
-            return "ich machen";
+    private String checkOrderStatus(Order order){
+
+        boolean flag    = order.isFinished();
+        String orderID  = String.valueOf(order.getOrderID());
+
+        if (flag) {
+            return "Order " + orderID + " finished!";
+        } else {
+            return "Order " + orderID + " still pending!";
         }
     }
 
+    public void actOnOrderFinished(Order order){;
+        checkOrder(order);
+        removeOrder(order);
+    }
 
     /** Getter */
-
     public int getId() {
         return id;
     }
@@ -74,8 +83,3 @@ public class Customer {
     public String getCity() {
         return city;
     }
-
-    public Order getOrder() {
-        return order;
-    }
-}
